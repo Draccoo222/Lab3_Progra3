@@ -89,24 +89,20 @@ template<class T>
 
 template<class T>
     void LinkedList<T>::erase(int pos){
-    if(size() == 0){
+    if(size() == 0 || pos < 0 || pos >= size() ){
         return;
     }
-    if(pos == size() - 1){
-        delete at(pos);
+    if(pos == 0){
+        Node<T>* temp = head;
+        head = head->next;
+        delete temp;
         return;
     }
 
-    Node<T>* before = at(pos -1);
-    Node<T>* erasedNode = at(pos);
-    Node<T>* tmp = erasedNode->next->next;
-
-    erasedNode = erasedNode->next;
-    before->next = erasedNode;
-    erasedNode->next = tmp;
-
-
-
+    Node<T>* before = at(pos - 1);
+    Node<T>* toDelete = before->next;
+    before->next = toDelete->next;
+    delete toDelete;
 
 }
 
@@ -116,7 +112,7 @@ template<class T>
            return head;
         }
 
-        int index = 0;
+        int index = 1;
         Node<T>* tmp = head->next;
         while(tmp != nullptr){
             if(pos == index){

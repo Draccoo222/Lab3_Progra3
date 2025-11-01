@@ -32,7 +32,7 @@ void Stack<T>::push(T newValue) {
 
 template <typename T>
 T Stack<T>::pop() {
-    if(size == 0) return -1;
+    if(size == 0) return T();
     T toReturn =  data[size - 1];
     size = size - 1;
     return toReturn;
